@@ -1,22 +1,19 @@
 import KartuTugas from "./KartuTugas";
 
-function DaftarTugas() {
+function DaftarTugas({ daftarTugas }) {
   return (
     <div className="daftar-container">
       <h3>Daftar Tugas</h3>
       <div className="daftar-list">
-        <KartuTugas
-          judul="Mengerjakan Tugas 6 React Dasar"
-          mataKuliah="Perancangan Web"
-          deadline="28 Oktober 2026"
-          prioritas="Tinggi"
-        />
-        <KartuTugas
-          judul="Membaca Materi Modul 7 AJAX"
-          mataKuliah="Perancangan Web"
-          deadline="30 Oktober 2026"
-          prioritas="Sedang"
-        />
+        {daftarTugas.map((tugas) => (
+          <KartuTugas
+            key={tugas.id}
+            judul={tugas.judul}
+            mataKuliah={tugas.mataKuliah}
+            deadline={tugas.deadline}
+            prioritas={tugas.prioritas}
+          />
+        ))}
       </div>
     </div>
   );
