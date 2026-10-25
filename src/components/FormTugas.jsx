@@ -1,15 +1,39 @@
 import { useState } from "react";
 
-function FormTugas() {
+function FormTugas({ onTambahTugas }) {
   const [judul, setJudul] = useState("");
   const [mataKuliah, setMataKuliah] = useState("");
   const [deadline, setDeadline] = useState("");
   const [prioritas, setPrioritas] = useState("Tinggi");
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!judul.trim() || !mataKuliah.trim()) {
+      alert("Harap isi judul tugas dan mata kuliah.");
+      return;
+    }
+
+    const tugasBaru = {
+      id: Date.now(),
+      judul: judul.trim(),
+      mataKuliah: mataKuliah.trim(),
+      deadline: deadline.trim() || "Tidak ditentukan",
+      prioritas: prioritas,
+    };
+
+    onTambahTugas(tugasBaru);
+
+    // Reset input setelah tambah tugas
+    setJudul("");
+    setMataKuliah("");
+    setDeadline("");
+    setPrioritas("Tinggi");
+  }
+
   return (
     <div className="form-container">
       <h3>Tambah Tugas Baru</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="judul">Judul Tugas</label>
           <input

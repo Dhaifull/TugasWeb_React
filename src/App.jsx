@@ -30,12 +30,16 @@ function App() {
     },
   ]);
 
+  function handleTambahTugas(tugasBaru) {
+    setDaftarTugas([...daftarTugas, tugasBaru]);
+  }
+
   return (
     <div className="app-container">
       <Header />
       <RingkasanTugas totalTugas={daftarTugas.length} />
       <main className="main-content">
-        <FormTugas />
+        <FormTugas onTambahTugas={handleTambahTugas} />
         <DaftarTugas daftarTugas={daftarTugas} />
       </main>
     </div>
