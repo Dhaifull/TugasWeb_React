@@ -1,19 +1,19 @@
-function KartuTugas({ judul, mataKuliah, deadline, prioritas }) {
-  const getBadgeClass = (level) => {
-    if (level === "Tinggi") return "badge badge-tinggi";
-    if (level === "Sedang") return "badge badge-sedang";
-    return "badge badge-rendah";
-  };
+function KartuTugas({ jadwal, onHapus, onDetail }) {
+  const date = new Date(`${jadwal.tanggal}T00:00:00`).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <div className="kartu-tugas">
+    <article className="kartu-tugas">
       <div className="kartu-header">
-        <h4>{judul}</h4>
-        <span className={getBadgeClass(prioritas)}>{prioritas}</span>
+        <h4>{jadwal.nama}</h4>
+        <span className={`badge ${["Kuliah", "Tugas", "Pribadi"].includes(jadwal.kategori) ? `badge-${jadwal.kategori.toLowerCase()}` : "badge-custom"}`}>{jadwal.kategori}</span>
       </div>
-      <p><strong>Mata Kuliah:</strong> {mataKuliah}</p>
-      <p><strong>Batas Waktu:</strong> {deadline}</p>
-    </div>
+      <p><strong>Tanggal:</strong> {date}</p>
+      <p><strong>Jam:</strong> {jadwal.jam}</p>
+      <div className="kartu-actions">
+        <button type="button" className="btn-detail" onClick={() => onDetail(jadwal)}>Detail</button>
+        <button type="button" className="btn-hapus" onClick={() => onHapus(jadwal.id)}>Hapus</button>
+      </div>
+    </article>
   );
 }
 

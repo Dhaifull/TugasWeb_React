@@ -1,9 +1,9 @@
 function RingkasanTugas({ totalTugas }) {
   return (
     <div className="ringkasan-box">
-      <h3>Ringkasan Tugas</h3>
+      <h3>Ringkasan Jadwal</h3>
       <p>
-        Total tugas saat ini: <strong>{totalTugas}</strong> tugas
+        Total jadwal saat ini: <strong>{totalTugas}</strong> jadwal
       </p>
     </div>
   );
