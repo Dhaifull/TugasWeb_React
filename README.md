@@ -1,16 +1,13 @@
-# React + Vite
+# 1. Endpoint API yang digunakan
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Saya menggunakan endpoint `https://dummyjson.com/quotes/random` untuk mengambil satu kutipan beserta nama penulisnya. Saya memilih API ini karena aplikasi DailyFlow digunakan untuk mencatat jadwal kuliah, tugas, dan kegiatan sehari-hari. Menurut saya, kutipan harian cocok ditampilkan sebagai pengingat atau penyemangat saat pengguna membuka aplikasi. API ini juga bisa digunakan tanpa API key, sehingga saya dapat mengambil datanya langsung menggunakan `fetch()`.
 
-Currently, two official plugins are available:
+Kutipan yang berhasil diambil saya simpan di browser selama hari itu. Jadi, kutipan tidak berubah setiap kali halaman dimuat ulang, dan aplikasi akan mengambil kutipan baru pada hari berikutnya.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# 2. Penerapan loading dan error
 
-## React Compiler
+Saya menangani proses pengambilan data di fungsi `muatKutipanHarian` pada file `src/components/AktivitasApi.jsx`. Sebelum request dimulai, status aplikasi diatur menjadi `loading`, lalu halaman menampilkan pesan bahwa kutipan sedang diambil.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Jika request berhasil dan respons berisi kutipan serta nama penulis, datanya disimpan ke state dan status diubah menjadi `success`. Kutipan kemudian ditampilkan pada halaman.
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Jika request gagal, status diubah menjadi `error` dan aplikasi menampilkan pesan bahwa kutipan belum dapat dimuat. Pada kondisi ini, tombol **Coba Lagi** ditampilkan. Saat tombol tersebut ditekan, fungsi `setPercobaan` memicu `muatKutipanHarian` untuk mengulangi request ke endpoint yang sama.

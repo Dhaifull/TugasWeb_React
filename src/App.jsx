@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import RingkasanTugas from "./components/RingkasanTugas";
 import FormTugas from "./components/FormTugas";
 import DaftarTugas from "./components/DaftarTugas";
+import AktivitasApi from "./components/AktivitasApi";
 import "./App.css";
 
 const jadwalContoh = [
@@ -66,6 +67,7 @@ function App() {
         <FormTugas onTambahTugas={handleTambahTugas} kategori={[...kategoriBawaan, ...kategoriTambahan]} onTambahKategori={handleTambahKategori} />
         <DaftarTugas daftarTugas={daftarTugas} kategori={ [...kategoriBawaan, ...kategoriTambahan] } onHapus={handleHapusJadwal} onDetail={setJadwalDetail} />
       </main>
+      <AktivitasApi />
       {jadwalDetail && (
         <div className="modal-backdrop" onClick={() => setJadwalDetail(null)}>
           <section className="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title" onClick={(e) => e.stopPropagation()}>
